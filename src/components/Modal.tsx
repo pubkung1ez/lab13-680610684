@@ -1,5 +1,7 @@
+// STEP 9 — Modal: ฟอร์มเพิ่ม task (ดู README: STEP 9)
+// เป็น "Controlled Component" — ค่าใน <input> ถูกกำหนดโดย state
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid"; // STEP 9: pnpm add uuid
 import { type TaskCardProps } from "../libs/Todolist";
 
 type props = {
@@ -7,16 +9,33 @@ type props = {
 };
 
 export default function Modal({ onAdd }: props) {
+  // STEP 9 — 1 state ต่อ 1 ช่องกรอก
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    if (title.trim()) {
+      const newtodo: TaskCardProps = {
+        id: uuidv4(),
+        title,
+        description,
+        isDone: false,
+      };
+      onAdd(newtodo);
+      // STEP 9 — reset ฟอร์มด้วยการ set state กลับเป็นค่าว่าง
+      setTitle("");
+      setDescription("");
+    }
+  };
 
-  const titleOnchange = (event: any) => {
+  // STEP 9 — onChange: อ่านค่าล่าสุดจาก event.target.value (string เสมอ)
+  const titleOnchange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
 
-  const descriptionOnchang = (event: any) => {
+  const descriptionOnchange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setDescription(event.target.value);
   };
 
@@ -34,6 +53,7 @@ export default function Modal({ onAdd }: props) {
             ></button>
           </div>
           <div className="modal-body">
+            {/* STEP 9 — Input: value ผูกกับ state + onChange อัปเดต state */}
             <input
               type="text"
               className="form-control mb-2"
@@ -45,7 +65,7 @@ export default function Modal({ onAdd }: props) {
               className="form-control"
               placeholder="description..."
               value={description}
-              onChange={descriptionOnchang}
+              onChange={descriptionOnchange}
             ></textarea>
           </div>
           <div className="modal-footer">
@@ -60,7 +80,7 @@ export default function Modal({ onAdd }: props) {
             <button
               type="button"
               className="btn btn-success"
-              onClick={() => {}}
+              onClick={handleSubmit}
             >
               Save
             </button>

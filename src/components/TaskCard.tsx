@@ -1,3 +1,7 @@
+// STEP 7 — TaskCard: การ์ด 1 ใบ (ดู README: STEP 7)
+// ไม่มี state ของตัวเอง — รับ "ข้อมูล" + "callback" มาทาง props
+// เวลากดปุ่ม จะเรียก callback กลับขึ้นไปให้ TodolistPage (parent) เป็นคนแก้ state
+
 interface props {
   id: string;
   title: string;

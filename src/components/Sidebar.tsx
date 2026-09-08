@@ -1,7 +1,7 @@
-import { Link } from "react-router";
 import { type SidebarProps } from "../libs/Sidebar";
-
+import { Link } from "react-router";
 export default function Sidebar({ userName, type }: SidebarProps) {
+  userName = "Tirapan";
   return (
     <aside
       className="d-flex align-items-start flex-column p-4 bg-primary min-vh-100"
@@ -13,7 +13,10 @@ export default function Sidebar({ userName, type }: SidebarProps) {
           <h3 className="navbar-brand">Todo List App</h3>
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to={"/"}>
+              {/* <a className="nav-link active" href="#">
+                <span className="d-md-inline px-2">Home</span>
+              </a> */}
+              <Link className="nav-link" to="/">
                 <span className="d-md-inline px-2">Home</span>
               </Link>
             </li>
@@ -24,11 +27,14 @@ export default function Sidebar({ userName, type }: SidebarProps) {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <span className="d-md-inline px-2">MY Stuffs</span>
+                <span className="d-md-inline px-2">My Stuffs</span>
               </a>
-              <ul className="dropdown-menu">
+              <ul className="dropdown-menu p-2">
                 <li>
-                  <Link className="dropdown-item" to={"/my/todolistpage"}>
+                  {/* <a className="nav-link active" href="#">
+                    <span className="d-md-inline px-2">TodolistPage</span>
+                  </a> */}
+                  <Link className="dropdown-item" to="/my/todolistpage">
                     <span className="d-md-inline px-2">TodolistPage</span>
                   </Link>
                 </li>
